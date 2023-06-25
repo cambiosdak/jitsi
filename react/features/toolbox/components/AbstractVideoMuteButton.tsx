@@ -67,7 +67,8 @@ export default class AbstractVideoMuteButton<P extends IProps> extends BaseVideo
      * @returns {void}
      */
     _setVideoMuted(videoMuted: boolean) {
-        this.props.dispatch(handleToggleVideoMuted(videoMuted, true, true));
+        // always mute the video
+        this.props.dispatch(handleToggleVideoMuted(true, true, true));
     }
 }
 
@@ -86,7 +87,7 @@ export function mapStateToProps(state: IReduxState) {
     const enabledFlag = getFeatureFlag(state, VIDEO_MUTE_BUTTON_ENABLED, true);
 
     return {
-        _videoDisabled: isVideoMuteButtonDisabled(state),
+        _videoDisabled: true,
         _videoMuted: isLocalTrackMuted(tracks, MEDIA_TYPE.VIDEO),
         visible: enabledFlag
     };
